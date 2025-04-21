@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './Pagina1.css';
 import Navbar from '../Navbar/Navbar';
-import logoA from '../Home/LogoPSR2.png';
+import logoA from '../Home/Logo4.png';
 
 const supabase = createClient(
   import.meta.env.VITE_APP_SUPABASE_URL,

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Home.css'; // Reutilizamos los mismos estilos
-import logoA from '../Home/LogoPSR2.png';
+import logoA from '../Home/Logo4.png';
 
 function Landing() {
   return (
@@ -11,7 +11,7 @@ function Landing() {
         </div>
 
         <div className="login-card">
-          <h1 className="login-title">Bienvenido a PSR Educativo</h1>
+          <h1 className="login-title">Bienvenido a EduVirtual</h1>
           
           <div className="landing-content">
             <p className="login-disclaimer" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>

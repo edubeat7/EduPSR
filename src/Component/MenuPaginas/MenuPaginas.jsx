@@ -1,6 +1,6 @@
 import React from 'react';
 import './MenuPaginas.css';
-import logoImage from '../Home/LogoPSR2.png';
+import logoImage from '../Home/Logo4.png';
 
 const MenuSeleccion = () => {
   const handleLogout = () => {
