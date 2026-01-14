@@ -1,84 +1,82 @@
-/* Estilos globales y normalización */
+/* ========================================
+   App.css - Global App Styles
+   Premium Design System Core
+   ======================================== */
+
+/* Normalize */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-:root {
-  /* Variables de colores */
-  --primary-color: #6b46c1;
-  --primary-color-dark: #553c9a;
-  --primary-color-light: #805ad5;
-  --secondary-color: #38b2ac;
-  --text-color: #ffffff;
-  --text-color-muted: rgba(255, 255, 255, 0.7);
-  --background-color: #121212;
-  --card-background: rgba(30, 30, 30, 0.8);
-  --error-color: #ff4444;
-  --success-color: #00C851;
-}
-
-/* Estilos del contenedor principal de la aplicación */
+/* Root Container */
 #root {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Main Container */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 var(--space-4);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Glass Card Base */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-xl);
+}
 
+/* ========================================
+   Responsive Breakpoints
+   ======================================== */
 
-/* Responsive breakpoints */
-/* Para tablets */
+/* Tablet */
 @media (max-width: 992px) {
   .container {
-    padding: 0 20px;
+    padding: 0 var(--space-5);
   }
 }
 
-/* Para tablets pequeñas y móviles grandes */
+/* Mobile Large */
 @media (max-width: 768px) {
-  html {
-    font-size: 15px;
-  }
-  
   .container {
-    padding: 0 15px;
+    padding: 0 var(--space-4);
   }
-  
+
   .card {
-    padding: 1.5rem;
+    padding: var(--space-5);
+    border-radius: var(--radius-xl);
   }
 }
 
-/* Para móviles */
+/* Mobile Small */
 @media (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-  
   .container {
-    padding: 0 10px;
+    padding: 0 var(--space-3);
   }
-  
+
   .card {
-    padding: 1.2rem;
-    border-radius: 12px;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
   }
-  
-  button, .button {
-    padding: 0.7rem 1.2rem;
+
+  button,
+  .button {
+    padding: 0.6rem 1rem;
   }
 }

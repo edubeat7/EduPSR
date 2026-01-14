@@ -1,279 +1,312 @@
-/* Estilos globales */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #4B0082, #483D8B);
-  color: #fff;
-  padding: 32px;
-}
+/* ========================================
+   Pagina1 - Document Library
+   Light Theme with Dark Text
+   ======================================== */
 
+/* Container */
 .container {
   width: 100%;
   height: 100%;
   max-width: 960px;
   margin: 0 auto;
+  padding: var(--space-4);
+  animation: fadeIn 0.6s ease-out;
 }
 
+/* Main Card */
 .card2 {
-  width: auto;
-  height: auto;
-  padding: 30px;
+  width: 100%;
+  padding: var(--space-8);
   text-align: center;
-  margin: 5px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
+  margin: var(--space-2);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.7s ease-out;
 }
 
+/* Header */
 h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 32px;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 800;
+  margin-bottom: var(--space-8);
+  color: var(--color-text-primary);
 }
 
-/* Botón de subida y acciones */
+.header-wrapper {
+  position: relative;
+  margin-bottom: var(--space-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* Upload Button */
 .upload-button {
-  background: #fff;
-  color: #4B0082;
-  padding: 12px 24px;
-  border-radius: 50px;
-  font-weight: bold;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-weight: 600;
   cursor: pointer;
-  display: inline-block;
-  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: all var(--transition-base);
   border: none;
-  margin: 5px;
+  margin: var(--space-2);
+  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.2);
 }
 
 .upload-button:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(30, 58, 95, 0.3);
 }
 
 .upload-button input[type="file"] {
   display: none;
 }
 
-.header-wrapper {
-  position: relative;
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
+/* Logout Button */
 .logout-button {
-  right: 0;
-  top: 0;
-  background: rgba(255, 255, 255, 0.9);
-  color: #dc3545;
-  border: 2px solid #dc3545;
-  transition: all 0.3s ease;
+  background: var(--color-white);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  transition: all var(--transition-base);
 }
 
 .logout-button:hover {
-  background: #dc3545;
-  color: white;
+  background: var(--color-error);
+  color: var(--color-white);
   transform: translateY(-2px);
 }
 
-/* Lista de elementos */
+/* File List */
 .file-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 20px;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 
+/* File/Folder Item */
 .audio-item {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 5px;
+  background: var(--color-white);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.3s;
+  transition: all var(--transition-base);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .audio-item:hover {
-  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
 }
 
 .audio-item .controls {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 15px;
+  gap: var(--space-4);
 }
 
+/* Buttons */
 .button {
-  padding: 8px 16px;
-  border-radius: 30px;
-  color: #ffffff;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all var(--transition-base);
   border: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .play-button {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
 }
 
 .play-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: scale(1.1);
 }
 
 .download-button {
-  background: #28a745;
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-light));
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.2);
 }
 
 .download-button:hover {
-  background: #218838;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
 }
 
 .delete-button {
-  background: #dc3545;
+  background: linear-gradient(135deg, var(--color-error), var(--color-error-light));
 }
 
-.delete-button:hover {
-  background: #c82333;
-}
-
-/* Estilos específicos para carpetas */
+/* Folder Button */
 .upload-button.folder {
-  background: rgba(255, 255, 255, 0.9);
-  color: #000 !important;
+  background: var(--color-white);
+  color: var(--color-text-primary) !important;
   width: 100%;
   text-align: left;
   justify-content: flex-start;
-  transition: transform 0.2s;
-  display: flex;
-  align-items: center;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--glass-border);
 }
 
 .upload-button.folder:hover {
-  transform: translateX(5px);
-  background: rgba(255, 255, 255, 0.95);
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
 }
 
-/* Ajustes de alineación */
+/* Controls & Actions */
 .controls {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 15px;
+  gap: var(--space-4);
 }
 
 .actions {
   margin-left: auto;
   display: flex;
-  gap: 10px;
+  gap: var(--space-3);
+  flex-shrink: 0;
 }
 
-/* Mejora de overflow en móviles */
+/* Filename */
 .filename {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex-grow: 1;
-  font-size: 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
-/* Animación de carga */
+/* Loading Animation */
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Logo */
 .logo-container {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-6);
 }
 
 .App-logo {
-  max-width: 150px;
+  max-width: 120px;
   height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+  animation: logoFloat 5s ease-in-out infinite;
 }
 
-/* Mejoras responsive */
+@keyframes logoFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ========================================
+   Responsive Styles
+   ======================================== */
+
 @media (max-width: 768px) {
-  body {
-    padding: 20px;
+  .container {
+    padding: var(--space-3);
   }
-  
+
+  .card2 {
+    padding: var(--space-6);
+  }
+
   h1 {
-    font-size: 28px;
-    margin-bottom: 24px;
+    font-size: 1.75rem;
   }
-  
+
   .header-wrapper {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .audio-item {
-    padding: 12px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--space-4);
   }
-  
+
   .controls {
     width: 100%;
     flex-wrap: wrap;
-    gap: 8px;
   }
-  
-  .play-button {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .filename {
-    font-size: 14px;
-    max-width: 100%;
-  }
-  
+
   .actions {
     width: 100%;
     margin-left: 0;
-    justify-content: space-between;
   }
-  
-  .upload-button, .button {
+
+  .actions .button {
+    flex: 1;
+  }
+
+  .upload-button,
+  .button {
     width: 100%;
-    margin: 5px 0;
-    padding: 10px 20px;
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  body {
-    padding: 15px;
+  .container {
+    padding: var(--space-2);
   }
-  
+
   .card2 {
-    padding: 15px;
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
   }
-  
+
   h1 {
-    font-size: 24px;
+    font-size: 1.4rem;
   }
-  
-  .upload-button, .button {
-    padding: 10px 20px;
-    font-size: 14px;
+
+  .App-logo {
+    max-width: 100px;
   }
 }

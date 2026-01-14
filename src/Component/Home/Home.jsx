@@ -11,7 +11,7 @@ function Landing() {
         </div>
 
         <div className="login-card">
-          <h1 className="login-title">Bienvenido a EduVirtual</h1>
+          <h1 className="login-title">Bienvenido a EduAbstract</h1>
           
           <div className="landing-content">
             <p className="login-disclaimer" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
