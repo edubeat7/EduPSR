@@ -809,43 +809,33 @@
   }
 }
 
-/* Landscape orientation adjustments */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .header-wrapper {
-    padding: var(--space-3);
-    margin-bottom: var(--space-3);
+/* Landscape orientation - Block with overlay */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+  /* Hide main content in landscape */
+  .quiz-container {
+    display: none !important;
   }
 
-  .main-title {
+  /* Show rotate message */
+  .container::before {
+    content: '📱 Por favor, gira tu dispositivo a modo vertical para ver el cuestionario';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     font-size: 1.2rem;
-    margin-bottom: var(--space-2);
-  }
-
-  .timer-display {
-    margin-top: var(--space-2);
-    padding: var(--space-1) var(--space-3);
-  }
-
-  .questions-section,
-  .files-section {
-    padding: var(--space-3);
-  }
-
-  .question-card {
-    padding: var(--space-3);
-  }
-
-  .option-label {
-    padding: var(--space-2);
-  }
-
-  .score-circle {
-    width: 80px;
-    height: 80px;
-  }
-
-  .score-number {
-    font-size: 1.5rem;
+    font-weight: 600;
+    padding: var(--space-6);
+    z-index: 9999;
+    line-height: 1.6;
   }
 }
 
