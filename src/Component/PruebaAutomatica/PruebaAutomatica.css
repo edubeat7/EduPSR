@@ -755,3 +755,104 @@
     page-break-inside: avoid;
   }
 }
+
+/* ========================================
+   Mobile Performance & Orientation Fixes
+   ======================================== */
+
+/* Prevent layout shifts during orientation change */
+@media screen and (max-width: 1024px) {
+  .container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .quiz-container {
+    contain: layout style;
+    will-change: contents;
+  }
+
+  /* Prevent reflows on orientation change */
+  .questions-section,
+  .files-section,
+  .results-section {
+    min-height: auto;
+    contain: content;
+  }
+
+  /* Improve touch responsiveness */
+  .upload-button,
+  .option-label {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Prevent zoom on input focus */
+  input[type="radio"] {
+    font-size: 16px;
+  }
+
+  /* Smooth transitions during orientation */
+  .loading-container {
+    position: relative;
+    min-height: 200px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .header-wrapper {
+    padding: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .main-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .timer-display {
+    margin-top: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+  }
+
+  .questions-section,
+  .files-section {
+    padding: var(--space-3);
+  }
+
+  .question-card {
+    padding: var(--space-3);
+  }
+
+  .option-label {
+    padding: var(--space-2);
+  }
+
+  .score-circle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .score-number {
+    font-size: 1.5rem;
+  }
+}
+
+/* Ensure smooth rendering */
+.spinner {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Prevent content jump on load */
+.questions-list {
+  min-height: 100px;
+}
+
+.files-list {
+  min-height: 50px;
+}

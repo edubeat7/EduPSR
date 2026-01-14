@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import * as XLSX from 'xlsx';
 import './PruebaAutomatica.css';
@@ -27,6 +27,28 @@ export default function ExcelQuizInterface() {
   const [remainingTime, setRemainingTime] = useState(null);
   const timeoutRef = useRef(null);
   const timerRef = useRef(null);
+  const isMountedRef = useRef(true);
+  const questionsRef = useRef([]);
+  const userAnswersRef = useRef({});
+
+  // Keep refs in sync with state for use in callbacks
+  useEffect(() => {
+    questionsRef.current = questions;
+  }, [questions]);
+
+  useEffect(() => {
+    userAnswersRef.current = userAnswers;
+  }, [userAnswers]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
 
   // Cargar la lista de archivos Excel desde Supabase
   useEffect(() => {
@@ -38,19 +60,106 @@ export default function ExcelQuizInterface() {
     };
   }, [currentPath]);
 
+  // Memoized function to calculate score - uses refs to avoid stale closures
+  const calculateScoreStable = useCallback(() => {
+    const currentQuestions = questionsRef.current;
+    const currentAnswers = userAnswersRef.current;
+    
+    if (currentQuestions.length === 0) return { correct: 0, total: 0, percentage: 0, grade: 'N/A', skipped: 0 };
+    
+    let correctCount = 0;
+    let skippedCount = 0;
+    const detailedResults = [];
+    
+    currentQuestions.forEach(question => {
+      if (currentAnswers[question.id] === undefined) {
+        skippedCount++;
+        detailedResults.push({
+          questionId: question.id,
+          isCorrect: false,
+          isSkipped: true,
+          userAnswer: null,
+          correctAnswer: question.correctAnswer
+        });
+      } else {
+        const isCorrect = currentAnswers[question.id] === question.correctAnswer;
+        if (isCorrect) {
+          correctCount++;
+        }
+        
+        detailedResults.push({
+          questionId: question.id,
+          isCorrect,
+          isSkipped: false,
+          userAnswer: currentAnswers[question.id],
+          correctAnswer: question.correctAnswer
+        });
+      }
+    });
+    
+    const percentage = (correctCount / currentQuestions.length) * 100;
+    
+    let grade = '';
+    if (percentage >= 90) grade = 'Excelente';
+    else if (percentage >= 80) grade = 'Muy Bien';
+    else if (percentage >= 70) grade = 'Bien';
+    else if (percentage >= 60) grade = 'Suficiente';
+    else grade = 'Necesita Mejorar';
+    
+    return {
+      correct: correctCount,
+      total: currentQuestions.length,
+      percentage,
+      grade,
+      skipped: skippedCount,
+      answered: currentQuestions.length - skippedCount,
+      details: detailedResults
+    };
+  }, []);
+
+  // Memoized submit function that uses refs - stable reference
+  const handleSubmitQuizStable = useCallback(() => {
+    if (!isMountedRef.current) return;
+    
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    
+    const scoreResults = calculateScoreStable();
+    setScore(scoreResults);
+    setShowResults(true);
+    
+    console.log(`Cuestionario completado con ${scoreResults.correct}/${scoreResults.total} (${scoreResults.percentage.toFixed(2)}%) - Calificación: ${scoreResults.grade}`);
+  }, [calculateScoreStable]);
+
   // Configurar el temporizador para el cuestionario
   useEffect(() => {
     if (isExcelLoaded && !showResults) {
-      // Iniciar temporizador de 15 minutos (900 segundos)
+      // Clear any existing timer first
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      
+      // Iniciar temporizador de 45 minutos (2700 segundos)
       const timeLimit = 45 * 60; 
       setRemainingTime(timeLimit);
       
       timerRef.current = setInterval(() => {
+        if (!isMountedRef.current) {
+          clearInterval(timerRef.current);
+          return;
+        }
+        
         setRemainingTime(prevTime => {
           if (prevTime <= 1) {
-            clearInterval(timerRef.current);
-            // Tiempo agotado, mostrar resultados automáticamente
-            handleSubmitQuiz();
+            // Schedule the submit on next tick to avoid state update conflicts
+            setTimeout(() => {
+              if (isMountedRef.current) {
+                handleSubmitQuizStable();
+              }
+            }, 0);
             return 0;
           }
           return prevTime - 1;
@@ -61,9 +170,10 @@ export default function ExcelQuizInterface() {
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
+        timerRef.current = null;
       }
     };
-  }, [isExcelLoaded, showResults]);
+  }, [isExcelLoaded, showResults, handleSubmitQuizStable]);
 
   // Función para formatear el tiempo restante
   const formatTime = (seconds) => {
@@ -415,43 +525,24 @@ export default function ExcelQuizInterface() {
     };
   };
 
-  const handleSubmitQuiz = () => {
-    // Detener el temporizador
+  // Wrapper function that calls the stable submit handler
+  const handleSubmitQuiz = useCallback(() => {
+    handleSubmitQuizStable();
+  }, [handleSubmitQuizStable]);
+
+  const handleRestartQuiz = useCallback(() => {
+    // Clear existing timer first
     if (timerRef.current) {
       clearInterval(timerRef.current);
+      timerRef.current = null;
     }
     
-    const scoreResults = calculateScore();
-    setScore(scoreResults);
-    setShowResults(true);
-    
-    // Registrar el resultado en la consola (podría enviarse a una base de datos en el futuro)
-    console.log(`Usuario ${userName} completó el cuestionario "${selectedFileName}" con ${scoreResults.correct}/${scoreResults.total} (${scoreResults.percentage.toFixed(2)}%) - Calificación: ${scoreResults.grade}`);
-  };
-
-  const handleRestartQuiz = () => {
     setUserAnswers({});
     setShowResults(false);
     setScore({ correct: 0, total: 0, percentage: 0, grade: 'N/A' });
     
-    // Reiniciar el temporizador (15 minutos)
-    setRemainingTime(15 * 60);
-    
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-    
-    timerRef.current = setInterval(() => {
-      setRemainingTime(prevTime => {
-        if (prevTime <= 1) {
-          clearInterval(timerRef.current);
-          handleSubmitQuiz();
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-  };
+    // The timer will be restarted by the useEffect when showResults becomes false
+  }, []);
 
   const handleBackToFiles = () => {
     // Detener el temporizador si está activo
