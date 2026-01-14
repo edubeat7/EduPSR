@@ -763,16 +763,23 @@
 /* Prevent layout shifts during orientation change */
 @media screen and (max-width: 1024px) {
   .container {
-    min-height: 100vh;
-    min-height: 100dvh;
-    /* Dynamic viewport height for mobile browsers */
+    min-height: auto;
+    /* Remove fixed min-height that causes issues in portrait */
+    height: auto;
     overflow-x: hidden;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-6);
   }
 
   .quiz-container {
     contain: layout style;
-    will-change: contents;
+    will-change: auto;
+    /* Changed from contents for better mobile performance */
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
   }
 
   /* Prevent reflows on orientation change */
