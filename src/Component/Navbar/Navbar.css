@@ -1,5 +1,5 @@
 /* ========================================
-   Navbar - Light Theme
+   Navbar - Premium Dark Theme
    ======================================== */
 
 .navbar {
@@ -14,8 +14,24 @@
   align-items: center;
   width: auto;
   margin: var(--space-4);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   animation: slideDown 0.5s ease-out;
+  position: relative;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 @keyframes slideDown {
@@ -52,16 +68,18 @@
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
   transition: all var(--transition-base);
+  position: relative;
 }
 
 .navbar a:hover {
   color: var(--color-text-primary);
-  background: var(--color-white);
+  background: rgba(99, 102, 241, 0.15);
 }
 
 .navbar a.active {
   color: var(--color-white);
-  background: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  box-shadow: var(--shadow-glow);
 }
 
 /* Logo Container */
@@ -76,12 +94,13 @@
 .App-logo1 {
   height: 50px;
   width: 50px;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
-  transition: transform var(--transition-spring);
+  filter: drop-shadow(0 4px 20px rgba(99, 102, 241, 0.4));
+  transition: all var(--transition-spring);
 }
 
 .App-logo1:hover {
   transform: scale(1.1);
+  filter: drop-shadow(0 8px 30px rgba(99, 102, 241, 0.6));
 }
 
 /* ========================================

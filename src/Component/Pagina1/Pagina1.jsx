@@ -20,7 +20,7 @@ export default function FileInterface() {
 
   useEffect(() => {
     fetchFolderContent();
-    
+
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
@@ -32,7 +32,7 @@ export default function FileInterface() {
       setErrorMessage('');
       setIsEmptyFolder(false);
       setItems([]);
-      
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
@@ -62,7 +62,7 @@ export default function FileInterface() {
             const { data: folderContent } = await supabase.storage
               .from('archivos')
               .list(`${currentPath}/${item.name}`);
-            
+
             if (!folderContent || folderContent.length === 0) return null;
 
             return { ...item, isFolder: true, name: item.name };
@@ -83,7 +83,7 @@ export default function FileInterface() {
         })
       );
 
-      const validItems = processedItems.filter(item => 
+      const validItems = processedItems.filter(item =>
         item !== null && (item.isFolder || item.name.endsWith('.pdf'))
       );
 
@@ -136,9 +136,9 @@ export default function FileInterface() {
 
       <div className="card2">
         <div className="header-wrapper">
-          <h1>📚 Biblioteca de Documentos</h1>
+          <h1>Biblioteca de Documentos</h1>
           {pathHistory.length > 0 && (
-            <button 
+            <button
               className="upload-button"
               onClick={handleGoBack}
               style={{ marginBottom: '20px' }}
@@ -152,7 +152,7 @@ export default function FileInterface() {
           {items.map(item => (
             <div key={item.id || item.name} className="audio-item">
               {item.isFolder ? (
-                <button 
+                <button
                   className="upload-button folder"
                   onClick={() => handleNavigate(item.name)}
                 >
@@ -167,13 +167,13 @@ export default function FileInterface() {
                       className="button download-button"
                       onClick={() => handleDownload(item.url, item.originalName)}
                     >
-                      ⬇ Descargar
+                      Descargar
                     </button>
                     <button
-                      className="button download-button"
+                      className="button view-button"
                       onClick={() => window.open(item.url, '_blank')}
                     >
-                      👨‍🏫 Ver
+                      Ver
                     </button>
                   </div>
                 </div>

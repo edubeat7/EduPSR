@@ -1,5 +1,5 @@
 /* ========================================
-   ListaVideos - Light Theme
+   ListaVideos - Premium Dark Theme
    ======================================== */
 
 /* Container */
@@ -37,8 +37,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), var(--color-primary), transparent);
-  opacity: 0.7;
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), var(--color-secondary), transparent);
 }
 
 .main-title {
@@ -46,6 +45,10 @@
   font-weight: 800;
   margin-bottom: var(--space-3);
   color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-text-primary), var(--color-primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .welcome-message {
@@ -88,7 +91,7 @@
   padding: var(--space-3) var(--space-5);
   border-radius: var(--radius-full);
   border: 1px solid var(--glass-border);
-  background: var(--color-white);
+  background: var(--color-bg-elevated);
   color: var(--color-text-primary);
   font-size: 1rem;
   font-family: var(--font-primary);
@@ -102,7 +105,7 @@
 .search-input:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), var(--shadow-glow);
 }
 
 /* Category Select */
@@ -111,14 +114,14 @@
   padding-right: var(--space-10);
   border-radius: var(--radius-full);
   border: 1px solid var(--glass-border);
-  background: var(--color-white);
+  background: var(--color-bg-elevated);
   color: var(--color-text-primary);
   font-size: 1rem;
   font-family: var(--font-primary);
   cursor: pointer;
   min-width: 200px;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right var(--space-4) center;
   background-size: 16px;
@@ -128,10 +131,11 @@
 .category-select:focus {
   outline: none;
   border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .category-select option {
-  background-color: var(--color-white);
+  background-color: var(--color-bg-card);
   color: var(--color-text-primary);
 }
 
@@ -158,35 +162,38 @@
   transition: all var(--transition-base);
   border: none;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.2);
+  box-shadow: var(--shadow-glow);
 }
 
 .upload-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(30, 58, 95, 0.3);
+  box-shadow: var(--shadow-xl), var(--shadow-glow);
 }
 
 .clear-filter-button {
-  background: var(--color-white);
+  background: var(--color-bg-elevated);
   color: var(--color-text-secondary);
   border: 1px solid var(--glass-border);
   box-shadow: none;
 }
 
 .clear-filter-button:hover {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-card);
   border-color: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
 .logout-button {
-  background: var(--color-white);
+  background: transparent;
   color: var(--color-error);
   border: 1px solid var(--color-error);
+  box-shadow: none;
 }
 
 .logout-button:hover {
   background: var(--color-error);
   color: var(--color-white);
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
 }
 
 /* Table Wrapper */
@@ -217,7 +224,7 @@
 .table-header {
   display: grid;
   grid-template-columns: 1.2fr 2fr 1fr;
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-elevated);
   padding: var(--space-4) var(--space-5);
   font-weight: 700;
   font-size: 0.85rem;
@@ -238,18 +245,19 @@
   grid-template-columns: 1.2fr 2fr 1fr;
   padding: var(--space-4) var(--space-5);
   border-bottom: 1px solid var(--glass-border);
-  background: var(--color-white);
+  background: var(--color-bg-card);
   transition: all var(--transition-base);
   min-width: 600px;
   align-items: center;
 }
 
 .table-row:nth-child(odd) {
-  background: var(--color-gray-50);
+  background: var(--color-bg-secondary);
 }
 
 .table-row:hover {
-  background: var(--color-bg-secondary);
+  background: var(--color-bg-elevated);
+  box-shadow: inset 3px 0 0 var(--color-primary);
 }
 
 .table-cell {
@@ -263,8 +271,8 @@
 }
 
 .category-badge {
-  background: var(--color-bg-secondary);
-  color: var(--color-primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+  color: var(--color-primary-light);
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-full);
   font-size: 0.85rem;
@@ -304,7 +312,7 @@
 .spinner {
   width: 48px;
   height: 48px;
-  border: 3px solid var(--color-gray-200);
+  border: 3px solid var(--color-bg-elevated);
   border-radius: 50%;
   border-top-color: var(--color-primary);
   animation: spin 1s ease-in-out infinite;
@@ -318,7 +326,7 @@
 }
 
 .error-container {
-  background: rgba(220, 38, 38, 0.05);
+  background: rgba(239, 68, 68, 0.1);
   border: 1px solid var(--color-error);
   padding: var(--space-6);
   border-radius: var(--radius-xl);
@@ -403,7 +411,7 @@
   }
 
   .empresa-cell {
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-elevated);
   }
 
   .upload-button {
