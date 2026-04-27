@@ -1,39 +1,51 @@
 import { Link } from 'react-router-dom';
-import './Home.css'; // Reutilizamos los mismos estilos
-import logoA from '../Home/Logo4.png';
+import './Home.css';
+import logoA from '../Home/Logo5psr.png';
 
 function Landing() {
   return (
-    <div className="container login-container">
-      <div className="login-form">
-        <div className="logo-container">
-          <img src={logoA} className="App-logo" alt="logo" />
-        </div>
-
-        <div className="login-card">
-          <h1 className="login-title">Bienvenido a EduAbstract</h1>
+    <div className="landing-wrapper fade-in">
+      <div className="landing-container">
+        
+        <div className="hero-section">
+          <div className="hero-logo-wrapper slide-up">
+            <img src={logoA} className="hero-logo" alt="EduAbstract Logo" />
+          </div>
           
-          <div className="landing-content">
-            <p className="login-disclaimer" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
-              Mejora tu aprendizaje con el contenido multimedia interactivo.
+          <div className="hero-content slide-up" style={{ animationDelay: '0.1s' }}>
+            <h1 className="hero-title">
+              Bienvenido a <span className="highlight-text">EduAbstract</span>
+            </h1>
+            
+            <p className="hero-subtitle">
+              Eleva tu aprendizaje con nuestra plataforma de contenido multimedia interactivo y herramientas de vanguardia.
             </p>
 
-            <div className="features-grid">
-              
-              <div className="feature-item">
-                <h3>📝 Pruebas Autocorregidas</h3>
-                <p>Banco de ejercicios interactivos con corrección automática y retroalimentación inmediata</p>
-              </div>
-              
-              <div className="feature-item">
-                <h3>👨‍🎓 Link y enlaces para videos de youtube</h3>
-                <p>Acceso a una lista de videos útiles para comprender la materia</p>
-              </div>
-            </div>
-
-            <a href="/MenuPaginas" className="upload-button login-button" style={{ maxWidth: '200px', margin: '2rem auto' }} >Comenzar Ahora</a>
+            <a href="/MenuPaginas" className="btn-start">
+              Comenzar Ahora
+              <span className="btn-icon">→</span>
+            </a>
           </div>
         </div>
+
+        <div className="features-section slide-up" style={{ animationDelay: '0.2s' }}>
+          <div className="feature-card">
+            <div className="feature-icon-wrapper">
+              <span className="feature-icon">📝</span>
+            </div>
+            <h3>Pruebas Autocorregidas</h3>
+            <p>Banco de ejercicios interactivos con corrección automática y retroalimentación inmediata para medir tu progreso.</p>
+          </div>
+          
+          <div className="feature-card">
+            <div className="feature-icon-wrapper">
+              <span className="feature-icon">👨‍🎓</span>
+            </div>
+            <h3>Recursos Audiovisuales</h3>
+            <p>Acceso a una biblioteca curada de videos educativos y material complementario para comprender la materia a fondo.</p>
+          </div>
+        </div>
+        
       </div>
     </div>
   );

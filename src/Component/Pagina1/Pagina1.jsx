@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './Pagina1.css';
 import Navbar from '../Navbar/Navbar';
-import logoA from '../Home/Logo4.png';
+import logoA from '../Home/Logo5psr.png';
 
 const supabase = createClient(
   import.meta.env.VITE_APP_SUPABASE_URL,
@@ -16,6 +16,7 @@ export default function FileInterface() {
   const [currentPath, setCurrentPath] = useState('ArchivoCarpeta');
   const [pathHistory, setPathHistory] = useState([]);
   const [isEmptyFolder, setIsEmptyFolder] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const timeoutRef = useRef(null);
 
   useEffect(() => {
@@ -135,21 +136,46 @@ export default function FileInterface() {
       </div>
 
       <div className="card2">
-        <div className="header-wrapper">
-          <h1>Biblioteca de Documentos</h1>
-          {pathHistory.length > 0 && (
-            <button
-              className="upload-button"
-              onClick={handleGoBack}
-              style={{ marginBottom: '20px' }}
-            >
-              ↩ Volver atrás
-            </button>
-          )}
+        <div className="header-wrapper" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <h1>Biblioteca de Documentos</h1>
+            {pathHistory.length > 0 && (
+              <button
+                className="upload-button"
+                onClick={handleGoBack}
+              >
+                ↩ Volver atrás
+              </button>
+            )}
+          </div>
+          
+          <div style={{ width: '100%', marginTop: '1rem' }}>
+            <input 
+              type="text" 
+              placeholder="Buscar archivos o carpetas..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{
+                width: '100%',
+                maxWidth: '400px',
+                padding: '0.75rem 1.25rem',
+                borderRadius: '9999px',
+                border: '1px solid rgba(8, 39, 86, 0.15)',
+                background: 'rgba(255,255,255,0.9)',
+                fontSize: '1rem',
+                fontFamily: 'inherit',
+                outline: 'none',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.04)'
+              }}
+            />
+          </div>
         </div>
 
         <div className="file-list">
-          {items.map(item => (
+          {items.filter(item => 
+            (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) || 
+            (item.originalName && item.originalName.toLowerCase().includes(searchTerm.toLowerCase()))
+          ).map(item => (
             <div key={item.id || item.name} className="audio-item">
               {item.isFolder ? (
                 <button

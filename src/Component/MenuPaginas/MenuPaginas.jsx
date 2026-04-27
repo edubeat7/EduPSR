@@ -1,6 +1,7 @@
 import React from 'react';
 import './MenuPaginas.css';
-import logoImage from '../Home/Logo4.png';
+import logoImage from '../Home/Logo5psr.png';
+import { Link } from 'react-router-dom';
 
 const MenuSeleccion = () => {
   const handleLogout = () => {
@@ -8,42 +9,53 @@ const MenuSeleccion = () => {
   };
 
   return (
-    <div className="menu-container">
-      <div className="menu-form">
-        <div className="logo-container">
-          <img src={logoImage} alt="Logo" className="App-logo" />
+    <div className="menu-dashboard fade-in">
+      <div className="dashboard-header">
+        <img src={logoImage} alt="EduAbstract Logo" className="dashboard-logo" />
+        <button onClick={handleLogout} className="btn-logout-small">
+          Cerrar sesión
+        </button>
+      </div>
+
+      <div className="dashboard-content slide-up">
+        <div className="dashboard-title-area">
+          <h1 className="dashboard-title">Panel de Control</h1>
+          <p className="dashboard-subtitle">Selecciona una herramienta para continuar con tu aprendizaje</p>
         </div>
 
-        <div className="menu-card">
-          <h1 className="menu-title">Seleccione una opción</h1>
+        <div className="dashboard-grid">
+          <a href="/Pagina1" className="dashboard-card action-card">
+            <div className="card-icon-wrapper" style={{ background: 'rgba(8, 39, 86, 0.4)' }}>
+              <span className="card-icon">📚</span>
+            </div>
+            <div className="card-text">
+              <h3>Material Adicional</h3>
+              <p>Accede a documentos y recursos de estudio complementarios.</p>
+            </div>
+            <div className="card-arrow">→</div>
+          </a>
 
-          <div className="menu-options">
-            <a href="/Pagina1" className="menu-option">
-              <span className="option-text">Material adicional</span>
-            </a>
+          <a href="/PruebaAutomatica" className="dashboard-card action-card">
+            <div className="card-icon-wrapper" style={{ background: 'rgba(67, 179, 152, 0.4)' }}>
+              <span className="card-icon">🎯</span>
+            </div>
+            <div className="card-text">
+              <h3>Cuestionario</h3>
+              <p>Pon a prueba tus conocimientos con ejercicios interactivos.</p>
+            </div>
+            <div className="card-arrow">→</div>
+          </a>
 
-            <a href="/PruebaAutomatica" className="menu-option">
-              <span className="option-text">Cuestionario</span>
-            </a>
-
-            <a href="/ListaVideos" className="menu-option">
-              <span className="option-text">Enlaces a videos</span>
-            </a>
-          </div>
-
-
-          <p className="menu-disclaimer">
-            Seleccione una opción para continuar
-          </p>
-        </div>
-
-        <div className="card2">
-          <button
-            className="upload-button logout-button"
-            onClick={handleLogout}
-          >
-            Cerrar sesión
-          </button>
+          <a href="/ListaVideos" className="dashboard-card action-card">
+            <div className="card-icon-wrapper" style={{ background: 'rgba(56, 189, 248, 0.4)' }}>
+              <span className="card-icon">▶️</span>
+            </div>
+            <div className="card-text">
+              <h3>Enlaces a Videos</h3>
+              <p>Explora nuestra biblioteca de contenido audiovisual.</p>
+            </div>
+            <div className="card-arrow">→</div>
+          </a>
         </div>
       </div>
     </div>

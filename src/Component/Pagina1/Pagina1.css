@@ -1,313 +1,134 @@
 /* ========================================
    Pagina1 - Document Library
-   Premium Dark Theme
+   Premium Light Theme
    ======================================== */
 
-/* Container */
 .container {
   width: 100%;
-  height: 100%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: var(--space-4);
-  animation: fadeIn 0.6s ease-out;
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 
-/* Main Card */
-.card2 {
-  width: 100%;
-  padding: var(--space-8);
+.logo-container {
   text-align: center;
-  margin: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.App-logo {
+  max-width: 120px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(8, 39, 86, 0.1));
+  transition: transform var(--transition-base);
+}
+
+.App-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Main Library Card */
+.card2 {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-xl);
-  animation: slideUp 0.7s ease-out;
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 
 .card2::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), var(--color-primary), transparent);
-}
-
-/* Header */
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  font-weight: 800;
-  margin-bottom: var(--space-8);
-  color: var(--color-text-primary);
-  background: linear-gradient(135deg, var(--color-text-primary), var(--color-primary-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--gradient-primary);
 }
 
 .header-wrapper {
-  position: relative;
-  margin-bottom: var(--space-8);
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: var(--space-4);
 }
 
-/* Upload Button */
+.header-wrapper h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Back Button */
 .upload-button {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  color: var(--color-white);
-  padding: var(--space-3) var(--space-6);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--glass-border);
+  padding: var(--space-3) var(--space-5);
   border-radius: var(--radius-full);
   font-weight: 600;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   transition: all var(--transition-base);
-  border: none;
-  margin: var(--space-2);
-  box-shadow: var(--shadow-glow);
-  position: relative;
-  overflow: hidden;
-}
-
-.upload-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+  margin-bottom: 0 !important; /* Override inline styles */
+  box-shadow: var(--shadow-sm);
 }
 
 .upload-button:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-xl), var(--shadow-glow);
-}
-
-.upload-button:hover::before {
-  left: 100%;
-}
-
-.upload-button input[type="file"] {
-  display: none;
-}
-
-/* Logout Button */
-.logout-button {
-  background: transparent;
-  color: var(--color-error);
-  border: 1px solid var(--color-error);
-  transition: all var(--transition-base);
-}
-
-.logout-button:hover {
-  background: var(--color-error);
-  color: var(--color-white);
+  background: var(--gradient-primary);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
 }
 
 /* File List */
 .file-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-4);
-  margin-top: var(--space-6);
 }
 
-/* File/Folder Item */
 .audio-item {
   background: var(--color-bg-elevated);
-  padding: var(--space-5);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
-  margin-bottom: var(--space-2);
+  padding: var(--space-4) var(--space-6);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   transition: all var(--transition-base);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-}
-
-.audio-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
 }
 
 .audio-item:hover {
-  transform: translateX(8px);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
-  border-color: var(--color-primary);
+  background: var(--color-bg-primary);
+  transform: translateX(4px);
+  border-color: var(--glass-border-light);
+  box-shadow: var(--shadow-md);
 }
 
-.audio-item:hover::before {
-  opacity: 1;
-}
-
-.audio-item .controls {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: var(--space-4);
-}
-
-/* Buttons */
-.button {
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-full);
-  color: var(--color-white);
-  cursor: pointer;
-  transition: all var(--transition-base);
-  border: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.play-button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-bg-secondary);
-  color: var(--color-text-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  flex-shrink: 0;
-  transition: all var(--transition-base);
-  border: 1px solid var(--glass-border);
-}
-
-.play-button:hover {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  color: var(--color-white);
-  transform: scale(1.1);
-  box-shadow: var(--shadow-glow);
-  border-color: transparent;
-}
-
-.download-button {
-  background: linear-gradient(135deg, var(--color-success), var(--color-success-light));
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.download-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-  transition: left 0.5s;
-}
-
-.download-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.5);
-}
-
-.download-button:hover::before {
-  left: 100%;
-}
-
-/* View Button - Same style as ListaVideos upload-button */
-.view-button {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.view-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-  transition: left 0.5s;
-}
-
-.view-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-}
-
-.view-button:hover::before {
-  left: 100%;
-}
-
-.delete-button {
-  background: linear-gradient(135deg, var(--color-error), var(--color-error-light));
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.delete-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-  transition: left 0.5s;
-}
-
-.delete-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.5);
-}
-
-.delete-button:hover::before {
-  left: 100%;
-}
-
-/* Folder Button */
+/* Folder specific */
 .upload-button.folder {
-  background: var(--color-bg-elevated);
-  color: var(--color-text-primary) !important;
   width: 100%;
-  text-align: left;
   justify-content: flex-start;
-  font-weight: 600;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--glass-border);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-bg-elevated);
+  font-size: 1.1rem;
 }
 
 .upload-button.folder:hover {
-  transform: translateX(8px);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
-  border-color: var(--color-primary);
+  background: var(--gradient-secondary);
+  color: #ffffff;
+  border-color: transparent;
 }
 
-/* Controls & Actions */
+/* Controls inside File Item */
 .controls {
   display: flex;
   align-items: center;
@@ -315,120 +136,80 @@ h1 {
   gap: var(--space-4);
 }
 
-.actions {
-  margin-left: auto;
-  display: flex;
-  gap: var(--space-3);
-  flex-shrink: 0;
+.play-button {
+  font-size: 1.5rem;
+  opacity: 0.8;
 }
 
-/* Filename */
 .filename {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex-grow: 1;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-text-primary);
 }
 
-/* Loading Animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* Actions (Download / View) */
+.actions {
+  display: flex;
+  gap: var(--space-3);
 }
 
-/* Logo */
-.logo-container {
-  text-align: center;
-  margin-bottom: var(--space-6);
+.button {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  transition: all var(--transition-base);
+  cursor: pointer;
 }
 
-.App-logo {
-  max-width: 120px;
-  height: auto;
-  filter: drop-shadow(0 10px 40px rgba(99, 102, 241, 0.5));
-  animation: logoFloat 5s ease-in-out infinite;
+.download-button {
+  background: rgba(67, 179, 152, 0.1);
+  color: var(--color-secondary-dark);
+  border: 1px solid rgba(67, 179, 152, 0.2);
 }
 
-@keyframes logoFloat {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
+.download-button:hover {
+  background: var(--color-secondary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
-/* ========================================
-   Responsive Styles
-   ======================================== */
+.view-button {
+  background: rgba(8, 39, 86, 0.05);
+  color: var(--color-primary);
+  border: 1px solid rgba(8, 39, 86, 0.1);
+}
+
+.view-button:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(8, 39, 86, 0.2);
+}
 
 @media (max-width: 768px) {
-  .container {
-    padding: var(--space-3);
-  }
-
   .card2 {
-    padding: var(--space-6);
+    padding: var(--space-5);
   }
-
-  h1 {
-    font-size: 1.75rem;
-  }
-
-  .header-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .audio-item {
+  
+  .controls {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-4);
   }
-
-  .controls {
-    width: 100%;
-    flex-wrap: wrap;
-  }
-
+  
   .actions {
     width: 100%;
-    margin-left: 0;
+    margin-top: var(--space-3);
   }
-
-  .actions .button {
-    flex: 1;
-  }
-
-  .upload-button,
+  
   .button {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: var(--space-2);
-  }
-
-  .card2 {
-    padding: var(--space-4);
-    border-radius: var(--radius-xl);
-  }
-
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  .App-logo {
-    max-width: 100px;
+    flex: 1;
+    text-align: center;
   }
 }
